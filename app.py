@@ -12,8 +12,10 @@ class StreamlitApp:
     
     def __init__(self):
         ppath = Path(__file__).parents[1] / 'ML2TMDB_03/box_office'
-        self.model = load_model(ppath) 
+        f = open("/ML2TMDB_03/box_office.pkl")
+        self.model = load_model(f) 
         self.save_fn = 'path.csv'
+        
 
     def predict(self, input_data):
         return predict_model(self.model, data=input_data)
