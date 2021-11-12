@@ -11,7 +11,7 @@ import os
 class StreamlitApp:
     
     def __init__(self):
-        ppath = Path(__file__).parents[1] / 'box_office'
+        ppath = Path(__file__).parents[1] / 'ML2TMDB_03/box_office'
         self.model = load_model(ppath) 
         self.save_fn = 'path.csv'
 
