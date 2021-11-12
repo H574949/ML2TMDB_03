@@ -35,18 +35,10 @@ class StreamlitApp:
         runtime = st.number_input('Movie RunTime', min_value=1, max_value=1000, value=1)
         popularity = st.number_input('Popularity Rating (0-100))', min_value=0, max_value=100, value=0)
         original_language = st.selectbox('Language', ['en', 'hi','ko','sr','fr','it','nl','zh','es','cs','ta','cn','ru','tr','ja','fa','sv','de','te','pt','mr'])
-       # train[['budget', 'runtime', 'genres', 'original_language', 'popularity', 'revenue']]
-            # får ikke fjernet release date og production comp selvom ikke med i plk fil
-        date = st.date_input("Date")
-        production_companies = st.text_input("Production Company")
-
-
-            
- 
 
         output =''
         input_dict = {'budget':budget, 'popularity':popularity, 'runtime':runtime, 'genres':genre,
-            'original_language':original_language, 'release_date':date,'production_companies':production_companies,}
+                    'original_language':original_language}
         input_df = pd.DataFrame(input_dict, index=[0])
 
         if st.button('Predict revenue'):
