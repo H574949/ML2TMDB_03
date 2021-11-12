@@ -8,8 +8,9 @@ import os
 
 
 class StreamlitApp:
+
     def __init__(self):
-        ppath = Path(__file__).parents[1] / 'ML2TMDB_03/box_office'
+        ppath = Path(__file__).parents[1] / 'ml2tmdb_03/box_office'
         self.model = load_model(ppath) 
         self.save_fn = 'path.csv'
 
@@ -28,31 +29,31 @@ class StreamlitApp:
     def run(self):
         st.title('BOX OFFICE REVENUE PREDICTION')
 
-        if True:
-            genre = st.selectbox('Select genres:', ['Action', 'Comedy', 'Romance', 'Sci-fi', 'Drama', 'Fantasy', 'Horror', 'Mystery', 'Thriller', 'Western', 'Adventure', 'Documentary'])
-            budget = st.number_input('Budget : ', min_value=1, max_value=10000000, value=10000)
-            runtime = st.number_input('Movie RunTime', min_value=1, max_value=1000, value=1)
-            popularity = st.number_input('Popularity Rating (0-100))', min_value=0, max_value=100, value=0)
-            original_language = st.selectbox('Language', ['en', 'hi','ko','sr','fr','it','nl','zh','es','cs','ta','cn','ru','tr','ja','fa','sv','de','te','pt','mr'])
-            # train[['budget', 'runtime', 'genres', 'original_language', 'popularity', 'revenue']]
+        
+        genre = st.selectbox('Select genres:', ['Action', 'Comedy', 'Romance', 'Sci-fi', 'Drama', 'Fantasy', 'Horror', 'Mystery', 'Thriller', 'Western', 'Adventure', 'Documentary'])
+        budget = st.number_input('Budget : ', min_value=1, max_value=10000000, value=10000)
+        runtime = st.number_input('Movie RunTime', min_value=1, max_value=1000, value=1)
+        popularity = st.number_input('Popularity Rating (0-100))', min_value=0, max_value=100, value=0)
+        original_language = st.selectbox('Language', ['en', 'hi','ko','sr','fr','it','nl','zh','es','cs','ta','cn','ru','tr','ja','fa','sv','de','te','pt','mr'])
+       # train[['budget', 'runtime', 'genres', 'original_language', 'popularity', 'revenue']]
             # får ikke fjernet release date og production comp selvom ikke med i plk fil
-            date = st.date_input("Date")
-            production_companies = st.text_input("Production Company")
+        date = st.date_input("Date")
+        production_companies = st.text_input("Production Company")
 
 
             
  
 
-            output =''
-            input_dict = {'budget':budget, 'popularity':popularity, 'runtime':runtime, 'genres':genre,
-                        'original_language':original_language, 'release_date':date,'production_companies':production_companies,}
-            input_df = pd.DataFrame(input_dict, index=[0])
+        output =''
+        input_dict = {'budget':budget, 'popularity':popularity, 'runtime':runtime, 'genres':genre,
+            'original_language':original_language, 'release_date':date,'production_companies':production_companies,}
+        input_df = pd.DataFrame(input_dict, index=[0])
 
-            if st.button('Predict revenue'):
-                output = self.predict(input_df)
-                self.store_prediction(output)
-                output = (output['Label'][0])/1000000  
-                st.success('Predicted revenue: {revenue:,.2f}$ million'.format(revenue = output).replace(",", " "))
+        if st.button('Predict revenue'):
+            output = self.predict(input_df)
+            self.store_prediction(output)
+            output = (output['Label'][0])/1000000  
+            st.success('Predicted revenue: {revenue:,.2f}$ million'.format(revenue = output).replace(",", " "))
 
 
 sa = StreamlitApp()
